@@ -1,16 +1,17 @@
-import { ContainerCartItem } from "./styles";
+import { ContainerCartItem, ImageCartItem, TitleCartItem, PriceCartItem, RemoveProduct } from "./styles";
+import { removeFromCart } from "../../state/shoppingCart.slice";
+import { useDispatch } from "react-redux";
 
-const CartItem = ({data, delOneFromCart, delAllFromCart}) => {
-    let {id, name, price, quantity} = data;
+const CartItem = ({data}) => {
+    let {image,title,price,id} = data
+    const dispatch = useDispatch();
 
     return (
         <ContainerCartItem>
-            <h4>{name}</h4>
-            <h5>${price} x {quantity} = ${price*quantity}.00</h5>
-            <button onClick={()=>delOneFromCart(id)}>Eliminar Uno</button>
-            <br />
-            <button onClick={()=>delAllFromCart(id,true)}>Eliminar Todos</button>
-            <br /><br />
+            <ImageCartItem src={image} alt={title}/>
+            <TitleCartItem>{title}</TitleCartItem>
+            <PriceCartItem>$ {price}</PriceCartItem>
+            <RemoveProduct onClick={() => dispatch(removeFromCart(id))}>Remove</RemoveProduct>
         </ContainerCartItem>
     );
 };

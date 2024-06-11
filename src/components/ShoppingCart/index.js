@@ -1,24 +1,26 @@
+import { useSelector } from "react-redux";
 import CartItem from "../CartItem";
-import { useDispatch, useSelector } from "react-redux";
-import { clearCart, delFromCart } from "../../actions/shoppingActions";
-import { ContainerCart } from "./styles";
+import { ContainerCart, AppHeader } from "./styles";
+import { Link } from "react-router-dom";
 
 const ShoppingCart = () => {
-    const state = useSelector(state=>state);
-    const dispatch = useDispatch();
-    const {cart} = state.shopping;
+    const cart = useSelector(state => state.cart);
 
     return (
         <article>
-            <h2>Carrito</h2>
+            <AppHeader>
+                <h1>E commerce</h1>
+                <Link to="/">
+                    <h4>Home</h4>
+                </Link>
+            </AppHeader>
+            <h2>Cart</h2>
             <ContainerCart>
-                <button onClick={()=>dispatch(clearCart())}>Limpiar Carrito</button>
                 {
-                    cart.map((item, index) => 
+                    cart.map((product) => 
                         <CartItem 
-                            key={index} data={item} 
-                            delOneFromCart={()=>dispatch(delFromCart(item.id))}
-                            delAllFromCart={()=>dispatch(delFromCart(item.id, true))}  
+                            key={product.id} 
+                            data={product} 
                         />
                 )}
             </ContainerCart>

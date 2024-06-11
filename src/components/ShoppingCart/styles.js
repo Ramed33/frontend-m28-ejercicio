@@ -9,6 +9,16 @@ const ContainerCart = styled.article`
     margin: auto;
 `;
 
+const AppHeader = styled.header`
+    padding: 25px;
+    box-sizing: border-box;
+    background-color: #87ceeb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
 export {
-    ContainerCart
+    ContainerCart,
+    AppHeader
 }
